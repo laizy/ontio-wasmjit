@@ -1,3 +1,6 @@
+os:
+  - linux
+  - osx
 language: rust
 rust:
   - nightly
@@ -6,6 +9,19 @@ cache: cargo
 
 before_script:
 - rustup component add rustfmt
+
 script:
   - bash ./.travis.build.sh
+  - mv target/release/libwasmjit_onto_interface.a libwasmjit_onto_capi_${TRAVIS_OS_NAME}.a
 
+deploy:
+  provider: releases
+  token: "${GITHUB_TOKEN}"
+  file_glob: true
+  file: libwasmjit*.a
+  skip_cleanup: true
+  overwrite: true
+  draft: true
+  on:
+    repo: laizy/ontio-wasmjit
+    tags: true

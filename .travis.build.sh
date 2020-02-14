@@ -12,7 +12,7 @@ else
 fi
 
 cargo fmt --all -- --check
-cargo build --all
+cargo build --release --all
 cargo test --all
 
 cd wasmjit-harness
