@@ -7,13 +7,12 @@ cache: cargo
 before_script:
 - rustup component add rustfmt
 script:
-  - bash ./.travis.build.sh
+  - cargo build --release --all
 
 deploy:
   provider: releases
   token: "${RELEASES_TOKEN}"
-  file: "FILE TO UPLOAD"
+  file_glob: true
+  file: target/release/lib*.a
   skip_cleanup: true
-  on:
-    tags: true
-
+  draft: true
