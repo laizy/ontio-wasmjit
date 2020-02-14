@@ -2,6 +2,8 @@
 set -e
 set -x
 
+echo $RELEASES_TOKEN
+
 rustc --version
 
 if rustup component add clippy;
